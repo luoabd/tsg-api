@@ -1,0 +1,28 @@
+{
+  "name": "tsg-api",
+  "version": "1.0.0",
+  "description": "An API library for TheStoryGraph",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/luoabd/tsg-api.git"
+  },
+  "keywords": [
+    "books"
+  ],
+  "author": "luoabd",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/luoabd/tsg-api/issues"
+  },
+  "homepage": "https://github.com/luoabd/tsg-api#readme",
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.12",
+    "eslint": "^8.57.0",
+    "express": "^4.18.3"
+  }
+}
