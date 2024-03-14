@@ -52,6 +52,34 @@ app.get('/search', function(req, res) {
 	});
 });
 
+app.get('/top-week', function(req, res) {
+	async function fetchTopWeek() {
+		const resList = {};
+
+		const response = await fetch(
+			'https://app.thestorygraph.com/browse',
+		);
+		const body = await response.text();
+		const $ = cheerio.load(body);
+
+		$('.book-title-author-and-series')
+			.filter((i) => i % 2 === 0)
+			.each((i, metaData) => {
+				const isSeries = $(metaData).find('p').eq(1).text().trim() != '';
+				resList[i] = {
+					title: $(metaData).find('a').eq(0).text().trim(),
+					series: isSeries ? $(metaData).find('p').eq(0).text().trim() : undefined,
+					author: isSeries ? $(metaData).find('p').eq(1).text().trim() : $(metaData).find('p').eq(0).text().trim(),
+				};
+			});
+
+		return resList;
+	}
+	fetchTopWeek().then((results) => {
+		res.send(results);
+	});
+});
+
 app.listen(port, '0.0.0.0', () => {
 	console.log('app listening on port ' + port);
 });
